@@ -9,7 +9,7 @@ import (
 // album represents data about a record album
 type album struct {
 	ID     string  `json:"id"`
-	Title  string  `json:"title"` // missing end "
+	Title  string  `json:"title"`
 	Artist string  `json:"artist"`
 	Price  float64 `json:"price"`
 }
@@ -31,7 +31,7 @@ var albums = []album{
 
 // getAlbums response with the list of all albums as JSON
 func getAlbums(c *gin.Context) {
-	c.IndentedJSON(http.StatusOK, albums)
+	c.JSON(http.StatusOK, albums)
 }
 
 // getAlbumByID locates the album whose ID value matches id
@@ -47,7 +47,7 @@ func getAlbumByID(c *gin.Context) {
 			return
 		}
 	}
-	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "album not found"})
+	c.JSON(http.StatusNotFound, gin.H{"message": "album not found"})
 }
 
 // postAlbums adds an album from JSON received in the request body
@@ -61,5 +61,5 @@ func postAlbums(c *gin.Context) {
 
 	// Add the new album to the slice
 	albums = append(albums, newAlbum)
-	c.IndentedJSON(http.StatusCreated, newAlbum)
+	c.JSON(http.StatusCreated, newAlbum)
 }
